@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 
+import { roleGuard } from './core/guards/role.guard';
+
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
 
@@ -24,6 +26,14 @@ export const routes: Routes = [
       import('./features/reservations/reservation-list/reservation-list.component').then(
         (m) => m.ReservationListComponent
       ),
+  },
+
+  {
+    path: 'faculties',
+    canActivate: [authGuard],
+    loadComponent: () => 
+      import('./features/faculties/pages/faculty-list/faculty-list')
+        .then((m) => m.FacultyList),
   },
 
   { path: 'unauthorized', loadComponent: () => import('./shared/unauthorized/unauthorized.component').then(m => m.UnauthorizedComponent) },

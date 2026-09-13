@@ -1,0 +1,11 @@
+@if (loading()) {
+    <p>Cargar  Facultades....</p>
+} @else if (error()) {
+    <p>{{ error ()}}</p>
+} @else {
+  <h2>Facultades</h2>
+
+  @for (faculty of faculties(); track faculty.id) {
+    <p>{{ faculty.name }}</p>
+  }
+}
