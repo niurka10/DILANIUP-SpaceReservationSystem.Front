@@ -1,0 +1,160 @@
+// Paleta extraída literal del prototipo compartido (:root del HTML).
+$navy: #101d38;
+$navy-2: #17284d;
+$accent: #3457e8;
+$accent-2: #5c7cf5;
+
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: linear-gradient(180deg, $navy 0%, $navy-2 100%);
+  color: #fff;
+  padding: 22px 14px;
+  gap: 4px;
+}
+
+.brand {
+  padding: 6px 10px 22px 10px;
+}
+
+.brand .mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, $accent-2, $accent);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.brand .mark::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  transform: rotate(45deg);
+}
+
+.brand .word {
+  font-weight: 800;
+  font-size: 16.5px;
+  letter-spacing: 0.3px;
+}
+
+.brand .word small {
+  display: block;
+  font-weight: 500;
+  font-size: 9.5px;
+  letter-spacing: 1.2px;
+  color: #a9b6de;
+  text-transform: uppercase;
+  margin-top: 1px;
+}
+
+.navgroup-label {
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+  color: #7a87ac;
+  padding: 16px 12px 6px;
+}
+
+.navitem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: 9px;
+  color: #c4cce6 !important;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  margin-bottom: 2px;
+}
+
+.navitem svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.navitem:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff !important;
+}
+
+.navitem.active {
+  background: $accent;
+  color: #fff !important;
+}
+
+.navitem.active svg {
+  opacity: 1;
+}
+
+.sidebar-foot {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.userchip {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  margin-bottom: 4px;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: $accent-2;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+
+.u-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.u-role {
+  font-size: 10.5px;
+  color: #9db0e0;
+}
+
+.logout-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 9px;
+  background: transparent;
+  border: none;
+  color: #c4cce6;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.logout-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
