@@ -12,19 +12,28 @@ import { AuthService } from '../../../core/auth/auth.service';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
-  // Inyección moderna con inject()
-  private readonly fb = inject(FormBuilder);
-  private readonly authService = inject(AuthService);
-  private readonly router = inject(Router);
+
+  private fb = inject(FormBuilder);
 
   readonly isLoading = signal(false);
   readonly errorMessage = signal<string | null>(null);
+  readonly passwordVisible = signal(false);
 
   // Ahora 'this.fb' ya está definido
   readonly form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
   });
+
+  constructor(
+  
+    private authService: AuthService,
+    private router: Router
+  ) { }
+
+  togglePasswordVisibility(): void {
+    this.passwordVisible.update((v) => !v);
+  }
 
   submit(): void {
     if (this.form.invalid) {
@@ -42,7 +51,7 @@ export class LoginComponent {
       error: (err) => {
         this.isLoading.set(false);
         this.errorMessage.set(
-          err?.error?.description ?? 'Credenciales inválidas. Intenta de nuevo.'
+          err?.error?.description ?? 'Correo o contraseña incorrectos.'
         );
       },
       complete: () => this.isLoading.set(false),
