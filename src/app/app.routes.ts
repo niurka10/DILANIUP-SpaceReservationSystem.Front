@@ -47,10 +47,26 @@ export const routes: Routes = [
       {
         path: 'faculties',
         canActivate: [authGuard],
-        loadComponent: () =>
-          import(
-            './features/faculties/pages/faculty-list/faculty-list'
-          ).then((m) => m.FacultyList),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./features/faculties/pages/faculty-list/faculty-list')
+                .then((m) => m.FacultyList),
+          },
+          {
+            path: 'new',
+            loadComponent: () =>
+              import('./features/faculties/pages/faculty-form/faculty-form')
+                .then((m) => m.FacultyForm),
+          },
+          {
+            path: ':id/edit',
+            loadComponent: () =>
+              import('./features/faculties/pages/faculty-form/faculty-form')
+                .then((m) => m.FacultyForm),
+          },
+        ]
       },
       {
         path: 'users',

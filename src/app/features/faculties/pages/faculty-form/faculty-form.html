@@ -1,0 +1,67 @@
+<div class="faculty-form-container">
+
+  <div class="faculty-form-header">
+    <h2>
+      {{ facultyId() ? 'Editar Facultad' : 'Nueva Facultad' }}
+    </h2>
+
+    <p>
+      {{ facultyId()
+        ? 'Actualiza la información de la facultad.'
+        : 'Registra una nueva facultad.'
+      }}
+    </p>
+  </div>
+
+  @if (error()) {
+    <div class="alert alert-danger">
+      {{ error() }}
+    </div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <div class="mb-3">
+      <label for="name" class="form-label">
+        Nombre de la facultad
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        formControlName="name"
+        placeholder="Ej. Facultad de Ingeniería"
+      />
+
+      @if (form.controls.name.touched && form.controls.name.invalid) {
+        <div class="text-danger mt-1">
+          El nombre de la facultad es obligatorio.
+        </div>
+      }
+    </div>
+
+    <div class="d-flex gap-2">
+
+      <button
+        type="button"
+        class="btn btn-secondary"
+        (click)="cancel()"
+        [disabled]="loading()"
+      >
+        Cancelar
+      </button>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="form.invalid || loading()"
+      >
+        {{ loading() ? 'Guardando...' : 'Guardar' }}
+      </button>
+
+    </div>
+
+  </form>
+
+</div>
