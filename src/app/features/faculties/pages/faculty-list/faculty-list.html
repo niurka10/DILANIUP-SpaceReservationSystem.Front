@@ -1,11 +1,84 @@
-@if (loading()) {
-    <p>Cargar  Facultades....</p>
-} @else if (error()) {
-    <p>{{ error ()}}</p>
-} @else {
-  <h2>Facultades</h2>
+<div class="faculty-list-container">
 
-  @for (faculty of faculties(); track faculty.id) {
-    <p>{{ faculty.name }}</p>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+      <h2>Facultades</h2>
+
+      <p class="text-muted">
+        Gestión de las facultades de la institución.
+      </p>
+    </div>
+
+    <a
+      routerLink="/faculties/new"
+      class="btn btn-primary"
+    >
+      + Nueva Facultad
+    </a>
+
+  </div>
+
+  @if (loading()) {
+
+    <p>Cargando facultades...</p>
+
+  } @else if (error()) {
+
+    <div class="alert alert-danger">
+      {{ error() }}
+    </div>
+
+  } @else if (faculties().length === 0) {
+
+    <div class="alert alert-info">
+      No existen facultades registradas.
+    </div>
+
+  } @else {
+
+    <div class="table-responsive">
+
+      <table class="table table-bordered table-hover">
+
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th class="text-center">Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          @for (faculty of faculties(); track faculty.id) {
+
+            <tr>
+
+              <td>
+                {{ faculty.name }}
+              </td>
+
+              <td class="text-center">
+
+                <a
+                  [routerLink]="['/faculties', faculty.id, 'edit']"
+                  class="btn btn-sm btn-outline-primary"
+                >
+                  Editar
+                </a>
+
+              </td>
+
+            </tr>
+
+          }
+
+        </tbody>
+
+      </table>
+
+    </div>
+
   }
-}
+
+</div>
