@@ -41,7 +41,7 @@ export interface RawAuthResponse {
 export const JWT_CLAIMS = {
   sub: 'sub',
   email: 'email',
-  role: 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/role',
+  role: 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role',
 } as const;
 
 export interface DecodedToken {
