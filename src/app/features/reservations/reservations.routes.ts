@@ -4,8 +4,15 @@ export const RESERVATIONS_ROUTES: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./reservation-list/reservation-list.component').then(
+      import('./reservation-list/reservation-list').then(
         (m) => m.ReservationListComponent
+      ),
+  },
+  {
+    path: 'new',
+    loadComponent: () =>
+      import('./reservation-form/reservation-form').then(
+        (m) => m.ReservationForm
       ),
   },
 ];
