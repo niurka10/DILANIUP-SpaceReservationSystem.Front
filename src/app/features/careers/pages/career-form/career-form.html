@@ -1,0 +1,151 @@
+<div class="career-form-page">
+
+  <!-- Encabezado -->
+  <div class="page-header">
+    <div>
+      <span class="breadcrumb">Catálogos / Carreras</span>
+
+      <h1>
+        {{ careerId() ? 'Editar carrera' : 'Nueva carrera' }}
+      </h1>
+
+      <p>
+        {{ careerId()
+          ? 'Actualiza la información de la carrera seleccionada.'
+          : 'Registra una nueva carrera académica en el sistema.'
+        }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Mensaje de error -->
+  @if (error()) {
+    <div class="alert-error">
+      <div class="alert-icon">!</div>
+
+      <div>
+        <strong>Ocurrió un problema</strong>
+        <p>{{ error() }}</p>
+      </div>
+    </div>
+  }
+
+  <!-- Formulario -->
+  <div class="form-card">
+
+    <div class="form-card-header">
+      <div class="form-icon">
+        🎓
+      </div>
+
+      <div>
+        <h2>Información de la carrera</h2>
+        <p>
+          Completa los datos requeridos para registrar la carrera.
+        </p>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+      <!-- Nombre -->
+      <div class="form-group">
+        <label for="name">
+          Nombre de la carrera
+          <span>*</span>
+        </label>
+
+        <p class="field-help">
+          Escribe el nombre oficial de la carrera académica.
+        </p>
+
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Ej. Ingeniería de Software"
+          autocomplete="off"
+        />
+
+        @if (form.controls.name.invalid && form.controls.name.touched) {
+          <small class="field-error">
+            El nombre de la carrera es obligatorio.
+          </small>
+        }
+      </div>
+
+      <!-- Facultad -->
+      <div class="form-group">
+        <label for="facultyId">
+          Facultad
+          <span>*</span>
+        </label>
+
+        <p class="field-help">
+          Selecciona la facultad a la que pertenece esta carrera.
+        </p>
+
+        <select id="facultyId" formControlName="facultyId">
+          <option value="" disabled>
+            Selecciona una facultad
+          </option>
+
+          @for (faculty of faculties(); track faculty.id) {
+            <option [value]="faculty.id">
+              {{ faculty.name }}
+            </option>
+          }
+        </select>
+
+        @if (
+          form.controls.facultyId.invalid &&
+          form.controls.facultyId.touched
+        ) {
+          <small class="field-error">
+            Debes seleccionar una facultad.
+          </small>
+        }
+      </div>
+
+      <!-- Información -->
+      <div class="form-info">
+        <span class="info-icon">i</span>
+
+        <p>
+          Los campos marcados con <strong>*</strong> son obligatorios.
+        </p>
+      </div>
+
+      <!-- Acciones -->
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn-cancel"
+          (click)="cancel()"
+          [disabled]="loading()">
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="btn-save"
+          [disabled]="form.invalid || loading()">
+
+          @if (loading()) {
+            <span class="button-loader"></span>
+            Guardando...
+          } @else {
+            {{ careerId() ? 'Guardar cambios' : 'Guardar carrera' }}
+          }
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+

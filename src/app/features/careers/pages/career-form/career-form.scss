@@ -1,10 +1,10 @@
-.faculty-form-page {
+.career-form-page {
   max-width: 900px;
   margin: 0 auto;
   padding: 28px;
 }
 
-/*ENCABEZADO*/
+/* ENCABEZADO*/
 
 .page-header {
   margin-bottom: 24px;
@@ -13,7 +13,6 @@
 .breadcrumb {
   display: block;
   margin-bottom: 8px;
-
   color: #6b7280;
   font-size: 12px;
   font-weight: 500;
@@ -21,7 +20,6 @@
 
 .page-header h1 {
   margin: 0 0 6px;
-
   color: #1f2937;
   font-size: 28px;
   font-weight: 700;
@@ -29,7 +27,6 @@
 
 .page-header p {
   margin: 0;
-
   color: #6b7280;
   font-size: 14px;
 }
@@ -40,13 +37,10 @@
   display: flex;
   align-items: flex-start;
   gap: 12px;
-
   margin-bottom: 20px;
   padding: 14px 16px;
-
   border: 1px solid #fecaca;
   border-radius: 9px;
-
   background: #fef2f2;
 }
 
@@ -54,58 +48,47 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 25px;
   height: 25px;
   flex-shrink: 0;
-
   border-radius: 50%;
-
   background: #dc2626;
   color: white;
-
   font-size: 13px;
   font-weight: 700;
 }
 
 .alert-error strong {
   display: block;
-
   margin-bottom: 3px;
-
   color: #991b1b;
   font-size: 14px;
 }
 
 .alert-error p {
   margin: 0;
-
   color: #b91c1c;
   font-size: 13px;
 }
 
-/*TARJETA DEL FORMULARIO*/
+/*TARJETA*/
 
 .form-card {
   overflow: hidden;
-
+  background: white;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-
-  background: white;
-
   box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
 }
+
+/*CABECERA DEL FORMULARIO*/
 
 .form-card-header {
   display: flex;
   align-items: center;
   gap: 14px;
-
   padding: 22px 24px;
-
   border-bottom: 1px solid #e5e7eb;
-
   background: #fafafa;
 }
 
@@ -113,21 +96,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 46px;
   height: 46px;
   flex-shrink: 0;
-
   border-radius: 10px;
-
   background: #eff6ff;
-
   font-size: 22px;
 }
 
 .form-card-header h2 {
   margin: 0 0 4px;
-
   color: #1f2937;
   font-size: 17px;
   font-weight: 650;
@@ -135,7 +113,6 @@
 
 .form-card-header p {
   margin: 0;
-
   color: #6b7280;
   font-size: 13px;
 }
@@ -152,11 +129,8 @@ form {
 
 .form-group label {
   display: block;
-
   margin-bottom: 5px;
-
   color: #374151;
-
   font-size: 14px;
   font-weight: 600;
 }
@@ -167,57 +141,46 @@ form {
 
 .field-help {
   margin: 0 0 9px;
-
   color: #9ca3af;
   font-size: 12px;
 }
 
-/*INPUT*/
-
-input {
+input,
+select {
   box-sizing: border-box;
-
   width: 100%;
   min-height: 44px;
-
   padding: 10px 12px;
-
   border: 1px solid #d1d5db;
   border-radius: 7px;
-
   outline: none;
-
   background: white;
   color: #1f2937;
-
   font-family: inherit;
   font-size: 14px;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 input::placeholder {
   color: #9ca3af;
 }
 
-input:focus {
+input:focus,
+select:focus {
   border-color: #2563eb;
-
-  box-shadow:
-    0 0 0 3px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
 }
 
-/*VALIDACIÓN*/
+select {
+  cursor: pointer;
+}
+
+/*VALIDACIONES*/
 
 .field-error {
   display: block;
-
   margin-top: 6px;
-
   color: #dc2626;
-
   font-size: 12px;
 }
 
@@ -227,13 +190,10 @@ input:focus {
   display: flex;
   align-items: center;
   gap: 9px;
-
   margin-top: 5px;
   padding: 11px 13px;
-
   border: 1px solid #dbeafe;
   border-radius: 7px;
-
   background: #eff6ff;
 }
 
@@ -241,23 +201,18 @@ input:focus {
   display: flex;
   align-items: center;
   justify-content: center;
-
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-
   border-radius: 50%;
-
   background: #2563eb;
   color: white;
-
   font-size: 11px;
   font-weight: 700;
 }
 
 .form-info p {
   margin: 0;
-
   color: #374151;
   font-size: 12px;
 }
@@ -268,33 +223,25 @@ input:focus {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-
   margin-top: 28px;
   padding-top: 20px;
-
   border-top: 1px solid #e5e7eb;
 }
 
 .form-actions button {
   min-width: 130px;
   min-height: 40px;
-
   padding: 9px 17px;
-
   border-radius: 7px;
-
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
-
   cursor: pointer;
-
   transition: 0.2s ease;
 }
 
 .btn-cancel {
   border: 1px solid #d1d5db;
-
   background: white;
   color: #374151;
 }
@@ -305,7 +252,6 @@ input:focus {
 
 .btn-save {
   border: 1px solid #1d4ed8;
-
   background: #1d4ed8;
   color: white;
 }
@@ -319,23 +265,17 @@ input:focus {
   opacity: 0.6;
 }
 
-/* LOADING DEL BOTÓN*/
+/*LOADER*/
 
 .button-loader {
   display: inline-block;
-
   width: 13px;
   height: 13px;
-
   margin-right: 7px;
-
   vertical-align: -2px;
-
   border: 2px solid rgba(255, 255, 255, 0.5);
   border-top-color: white;
-
   border-radius: 50%;
-
   animation: spin 0.7s linear infinite;
 }
 
@@ -348,8 +288,7 @@ input:focus {
 /*RESPONSIVE*/
 
 @media (max-width: 650px) {
-
-  .faculty-form-page {
+  .career-form-page {
     padding: 18px;
   }
 
@@ -372,5 +311,5 @@ input:focus {
   .form-actions button {
     width: 100%;
   }
-
 }
+

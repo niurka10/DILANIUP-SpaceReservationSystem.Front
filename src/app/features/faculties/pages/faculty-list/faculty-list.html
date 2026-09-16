@@ -1,84 +1,113 @@
-<div class="faculty-list-container">
+<div class="faculty-page">
 
-  <div class="d-flex justify-content-between align-items-center mb-4">
-
+  <!-- Encabezado -->
+  <div class="page-header">
     <div>
-      <h2>Facultades</h2>
-
-      <p class="text-muted">
-        Gestión de las facultades de la institución.
-      </p>
+      <span class="breadcrumb">Catálogos / Facultades</span>
+      <h1>Facultades</h1>
+      <p>Administra las facultades académicas registradas en la institución.</p>
     </div>
 
-    <a
-      routerLink="/faculties/new"
-      class="btn btn-primary"
-    >
-      + Nueva Facultad
+    <a routerLink="/faculties/new" class="btn-new">
+      <span class="btn-icon">+</span>
+      Nueva facultad
     </a>
-
   </div>
 
   @if (loading()) {
 
-    <p>Cargando facultades...</p>
+    <!-- Cargando -->
+    <div class="state-card">
+      <div class="loader"></div>
+      <p>Cargando facultades...</p>
+    </div>
 
   } @else if (error()) {
 
-    <div class="alert alert-danger">
-      {{ error() }}
-    </div>
+    <!-- Error -->
+    <div class="state-card error-card">
+      <div class="state-icon">!</div>
 
-  } @else if (faculties().length === 0) {
-
-    <div class="alert alert-info">
-      No existen facultades registradas.
+      <div>
+        <h3>No se pudieron cargar las facultades</h3>
+        <p>{{ error() }}</p>
+      </div>
     </div>
 
   } @else {
 
-    <div class="table-responsive">
-
-      <table class="table table-bordered table-hover">
-
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th class="text-center">Acciones</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          @for (faculty of faculties(); track faculty.id) {
-
-            <tr>
-
-              <td>
-                {{ faculty.name }}
-              </td>
-
-              <td class="text-center">
-
-                <a
-                  [routerLink]="['/faculties', faculty.id, 'edit']"
-                  class="btn btn-sm btn-outline-primary"
-                >
-                  Editar
-                </a>
-
-              </td>
-
-            </tr>
-
-          }
-
-        </tbody>
-
-      </table>
-
+    <!-- Resumen -->
+    <div class="summary-card">
+      <div class="summary-icon">🏛️</div>
+      <div>
+        <span class="summary-label">Facultades registradas</span>
+        <strong>{{ faculties().length }}</strong>
+      </div>
     </div>
 
-  }
+    <!-- Tabla -->
+    <div class="table-card">
+      <div class="table-header">
+        <div>
+          <h2>Listado de facultades</h2>
+          <p>
+            Consulta y administra las facultades registradas.
+          </p>
+        </div>
+      </div>
 
+      @if (faculties().length === 0) {
+        <!-- Sin registros -->
+        <div class="empty-state">
+          <div class="empty-icon">🏛️</div>
+          <h3>No hay facultades registradas</h3>
+          <p>
+            Comienza registrando la primera facultad académica.
+          </p>
+
+          <a routerLink="/faculties/new" class="btn-new">
+            <span class="btn-icon">+</span>
+            Nueva facultad
+          </a>
+        </div>
+
+      } @else {
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre de la facultad</th>
+                <th class="actions-column">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (faculty of faculties(); track faculty.id) {
+                <tr>
+                  <td>
+                    <div class="faculty-name">
+                      <div class="faculty-avatar">
+                        🏛️
+                      </div>
+                      <div>
+                        <strong>{{ faculty.name }}</strong>
+                        <span>Unidad académica</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="actions-column">
+                    <a
+                      [routerLink]="['/faculties', faculty.id, 'edit']"
+                      class="btn-edit">
+                      Editar
+                    </a>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  }
 </div>

@@ -1,0 +1,124 @@
+<div class="career-page">
+
+  <!-- Encabezado -->
+  <div class="page-header">
+    <div>
+      <h1>Carreras</h1>
+      <p>Administra las carreras académicas registradas en la institución.</p>
+    </div>
+
+    <a routerLink="/careers/new" class="btn-new">
+      <span class="btn-icon">+</span>
+      Nueva carrera
+    </a>
+  </div>
+
+  <!-- Estado de carga -->
+  @if (loading()) {
+    <div class="state-card">
+      <div class="loader"></div>
+      <p>Cargando carreras...</p>
+    </div>
+  }
+
+  <!-- Estado de error -->
+  @else if (error()) {
+    <div class="state-card error-card">
+      <div class="state-icon">!</div>
+      <div>
+        <h3>No se pudieron cargar las carreras</h3>
+        <p>{{ error() }}</p>
+      </div>
+    </div>
+  }
+
+  <!-- Contenido -->
+  @else {
+
+    <!-- Resumen -->
+    <div class="summary-card">
+      <div class="summary-icon">
+        🎓
+      </div>
+
+      <div>
+        <span class="summary-label">Carreras registradas</span>
+        <strong>{{ careers().length }}</strong>
+      </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="table-card">
+
+      <div class="table-header">
+        <div>
+          <h2>Listado de carreras</h2>
+          <p>Consulta y administra las carreras registradas.</p>
+        </div>
+      </div>
+
+      @if (careers().length === 0) {
+
+        <div class="empty-state">
+          <div class="empty-icon">🎓</div>
+          <h3>No hay carreras registradas</h3>
+          <p>Comienza registrando la primera carrera académica.</p>
+
+          <a routerLink="/careers/new" class="btn-new">
+            <span class="btn-icon">+</span>
+            Nueva carrera
+          </a>
+        </div>
+
+      } @else {
+
+        <div class="table-wrapper">
+          <table>
+
+            <thead>
+              <tr>
+                <th>Nombre de la carrera</th>
+                <th class="actions-column">Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              @for (career of careers(); track career.id) {
+                <tr>
+
+                  <td>
+                    <div class="career-name">
+                      <div class="career-avatar">
+                        🎓
+                      </div>
+
+                      <div>
+                        <strong>{{ career.name }}</strong>
+                        <span>Programa académico</span>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td class="actions-column">
+                    <a
+                      [routerLink]="['/careers', career.id, 'edit']"
+                      class="btn-edit">
+                      Editar
+                    </a>
+                  </td>
+
+                </tr>
+              }
+            </tbody>
+
+          </table>
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+</div>
+```

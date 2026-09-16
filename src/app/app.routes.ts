@@ -48,7 +48,7 @@ export const routes: Routes = [
       {
         path: 'careers',
         loadChildren: () =>
-          import('./features/careers/carreers.routes').then((m) => m.CAREERS_ROUTES),
+          import('./features/careers/careers.routes').then((m) => m.CAREERS_ROUTES),
       },
       {
         path: 'spaces',

@@ -1,67 +1,113 @@
-<div class="faculty-form-container">
+<div class="faculty-form-page">
+  <!-- Encabezado -->
+  <div class="page-header">
+    <div>
+      <span class="breadcrumb">Catálogos / Facultades</span>
 
-  <div class="faculty-form-header">
-    <h2>
-      {{ facultyId() ? 'Editar Facultad' : 'Nueva Facultad' }}
-    </h2>
+      <h1>
+        {{ facultyId() ? 'Editar facultad' : 'Nueva facultad' }}
+      </h1>
 
-    <p>
-      {{ facultyId()
-        ? 'Actualiza la información de la facultad.'
-        : 'Registra una nueva facultad.'
-      }}
-    </p>
+      <p>
+        {{ facultyId()
+          ? 'Actualiza la información de la facultad seleccionada.'
+          : 'Registra una nueva facultad académica en el sistema.'
+        }}
+      </p>
+    </div>
   </div>
 
+  <!-- Error -->
   @if (error()) {
-    <div class="alert alert-danger">
-      {{ error() }}
+    <div class="alert-error">
+      <div class="alert-icon">!</div>
+      <div>
+        <strong>Ocurrió un problema</strong>
+        <p>{{ error() }}</p>
+      </div>
     </div>
   }
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
-    <div class="mb-3">
-      <label for="name" class="form-label">
-        Nombre de la facultad
-      </label>
-
-      <input
-        id="name"
-        type="text"
-        class="form-control"
-        formControlName="name"
-        placeholder="Ej. Facultad de Ingeniería"
-      />
-
-      @if (form.controls.name.touched && form.controls.name.invalid) {
-        <div class="text-danger mt-1">
-          El nombre de la facultad es obligatorio.
-        </div>
-      }
+  <!-- Formulario -->
+  <div class="form-card">
+    <div class="form-card-header">
+      <div class="form-icon">
+        🏛️
+      </div>
+      <div>
+        <h2>Información de la facultad</h2>
+        <p>
+          Completa los datos requeridos para registrar la facultad.
+        </p>
+      </div>
     </div>
 
-    <div class="d-flex gap-2">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Nombre -->
+      <div class="form-group">
+        <label for="name">
+          Nombre de la facultad
+          <span>*</span>
+        </label>
 
-      <button
-        type="button"
-        class="btn btn-secondary"
-        (click)="cancel()"
-        [disabled]="loading()"
-      >
-        Cancelar
-      </button>
+        <p class="field-help">
+          Escribe el nombre oficial de la facultad académica.
+        </p>
 
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="form.invalid || loading()"
-      >
-        {{ loading() ? 'Guardando...' : 'Guardar' }}
-      </button>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Ej. Facultad de Ingeniería"
+          autocomplete="off"
+        />
 
-    </div>
+        @if (
+          form.controls.name.touched &&
+          form.controls.name.invalid
+        ) {
+          <small class="field-error">
+            El nombre de la facultad es obligatorio.
+          </small>
 
-  </form>
+        }
+      </div>
 
+      <!-- Información -->
+      <div class="form-info">
+        <span class="info-icon">i</span>
+        <p>
+          El campo marcado con <strong>*</strong> es obligatorio.
+        </p>
+      </div>
+
+      <!-- Acciones -->
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn-cancel"
+          (click)="cancel()"
+          [disabled]="loading()">
+          Cancelar
+        </button>
+
+        <button
+          type="submit"
+          class="btn-save"
+          [disabled]="form.invalid || loading()">
+
+          @if (loading()) {
+
+            <span class="button-loader"></span>
+            Guardando...
+
+          } @else {
+
+            {{ facultyId() ? 'Guardar cambios' : 'Guardar facultad' }}
+
+          }
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
