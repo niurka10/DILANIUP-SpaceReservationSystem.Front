@@ -14,10 +14,10 @@ export class ReservationService {
     }
 
     getById (id: string): Observable<Reservation>{
-        return this.http.get<Reservation>('${API_BASE}/${id}')
+        return this.http.get<Reservation>(`${API_BASE}/${id}`)  
     }
 
     listMine(): Observable<Reservation[]>{
-        return this.http.get<Reservation[]>('${API_BASE}/mine')
+        return this.http.get<Reservation[]>(`${API_BASE}/mine`)
     }
 }

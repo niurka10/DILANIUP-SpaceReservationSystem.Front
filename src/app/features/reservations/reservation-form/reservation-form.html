@@ -8,9 +8,9 @@
 
   <form [formGroup]="form" (ngSubmit)="submit()" class="reservation-form">
     <div class="field">
-      <label for="spaceId">Espacio *</label>
+      <label for="spaceId">Espacio (opcional si eliges algun recurso)</label>
       <select id="spaceId" formControlName="spaceId">
-        <option value="" disabled>Selecciona un espacio</option>
+        <option value="" disabled>Sin Espacio - solo recursos</option>
         @for (space of spaces(); track space.id) {
           <option [value]="space.id">
             {{ space.name }} — {{ spaceTypeLabels[space.type] }} (cap. {{ space.capacity }})

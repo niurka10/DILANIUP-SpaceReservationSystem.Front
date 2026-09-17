@@ -88,5 +88,5 @@ export const routes: Routes = [
       import('./shared/unauthorized/unauthorized.component').then((m) => m.UnauthorizedComponent),
   },
 
-  { path: '**', redirectTo: 'login' },
+  { path: '**', redirectTo: '' },
 ];
