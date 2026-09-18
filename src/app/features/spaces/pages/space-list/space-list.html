@@ -1,0 +1,210 @@
+<div class="space-page">
+
+  <div class="page-header">
+    <div>
+      <h1>Espacios</h1>
+      <p>Administra los espacios físicos de la institución.</p>
+    </div>
+
+    <a routerLink="/spaces/new" class="btn-new">
+      + Nuevo espacio
+    </a>
+  </div>
+
+  @if (loading()) {
+
+    <div class="alert alert-info">
+      Cargando espacios...
+    </div>
+
+  } @else if (error()) {
+
+    <div class="alert alert-danger">
+      {{ error() }}
+    </div>
+
+  } @else {
+
+    <!-- ========================= -->
+    <!-- ESPACIOS ACTIVOS -->
+    <!-- ========================= -->
+
+    <div class="summary-card">
+      <strong>{{ activeSpaces.length }}</strong>
+      <span>Espacios activos</span>
+    </div>
+
+    <div class="table-card">
+
+      <h2>Espacios activos</h2>
+
+      @if (activeSpaces.length === 0) {
+
+        <div class="empty-state">
+          <h3>No hay espacios activos</h3>
+          <p>No existen espacios disponibles actualmente.</p>
+        </div>
+
+      } @else {
+
+        <div class="table-responsive">
+
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Capacidad</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              @for (space of activeSpaces; track space.id) {
+
+                <tr>
+
+                  <td>{{ space.name }}</td>
+
+                  <td>
+                    {{ getSpaceType(space.type) }}
+                  </td>
+
+                  <td>
+                    {{ space.capacity }}
+                  </td>
+
+                  <td>
+                    {{ space.location }}
+                  </td>
+
+                  <td>
+                    <span class="status-active">
+                      Activo
+                    </span>
+                  </td>
+
+                  <td class="actions">
+
+                    <a
+                      [routerLink]="['/spaces', space.id, 'edit']"
+                      class="btn-edit">
+                      Editar
+                    </a>
+
+                    <button
+                      type="button"
+                      class="btn-deactivate"
+                      (click)="deactivate(space.id)">
+                      Desactivar
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              }
+
+            </tbody>
+          </table>
+
+        </div>
+
+      }
+
+    </div>
+
+
+    <!-- ========================= -->
+    <!-- ESPACIOS DESACTIVADOS -->
+    <!-- ========================= -->
+
+    <div class="table-card inactive-card">
+
+      <h2>Espacios desactivados</h2>
+
+      @if (inactiveSpaces.length === 0) {
+
+        <div class="empty-state">
+          <h3>No hay espacios desactivados</h3>
+          <p>Los espacios que desactives aparecerán aquí.</p>
+        </div>
+
+      } @else {
+
+        <div class="table-responsive">
+
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Capacidad</th>
+                <th>Ubicación</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+              @for (space of inactiveSpaces; track space.id) {
+
+                <tr>
+
+                  <td>{{ space.name }}</td>
+
+                  <td>
+                    {{ getSpaceType(space.type) }}
+                  </td>
+
+                  <td>
+                    {{ space.capacity }}
+                  </td>
+
+                  <td>
+                    {{ space.location }}
+                  </td>
+
+                  <td>
+                    <span class="status-inactive">
+                      Inactivo
+                    </span>
+                  </td>
+
+                  <td class="actions">
+
+                    <a
+                      [routerLink]="['/spaces', space.id, 'edit']"
+                      class="btn-edit">
+                      Editar
+                    </a>
+
+                    <button
+                      type="button"
+                      class="btn-activate"
+                      (click)="activate(space.id)">
+                      Activar
+                    </button>
+
+                  </td>
+
+                </tr>
+
+              }
+
+            </tbody>
+          </table>
+
+        </div>
+
+      }
+
+    </div>
+
+  }
+
+</div>

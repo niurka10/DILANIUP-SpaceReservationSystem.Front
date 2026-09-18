@@ -1,0 +1,171 @@
+<div class="space-form-page">
+
+  <div class="page-header">
+    <div>
+      <a routerLink="/spaces" class="back-link">
+        ← Volver a espacios
+      </a>
+
+      <h1>
+        {{ isEdit ? 'Editar espacio' : 'Nuevo espacio' }}
+      </h1>
+
+      <p>
+        {{ isEdit
+          ? 'Actualiza la información del espacio.'
+          : 'Registra un nuevo espacio físico de la institución.'
+        }}
+      </p>
+    </div>
+  </div>
+
+  @if (error) {
+    <div class="alert alert-danger">
+      {{ error }}
+    </div>
+  }
+
+  @if (loading() && isEdit) {
+    <div class="alert alert-info">
+      Cargando información del espacio...
+    </div>
+  }
+
+  @if (!loading() || !isEdit) {
+    <div class="form-card">
+      <form [formGroup]="form" (ngSubmit)="save()">
+
+        <div class="form-grid">
+
+          <!-- Nombre -->
+          <div class="form-group">
+            <label for="name">
+              Nombre del espacio
+            </label>
+
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              placeholder="Ej. Aula 101"
+              class="form-control"
+            />
+
+            @if (
+              form.controls.name.invalid &&
+              form.controls.name.touched
+            ) {
+              <small class="field-error">
+                El nombre del espacio es obligatorio.
+              </small>
+            }
+          </div>
+
+          <!-- Tipo -->
+          <div class="form-group">
+            <label for="type">
+              Tipo de espacio
+            </label>
+
+            <select
+              id="type"
+              formControlName="type"
+              class="form-control"
+              [disabled]="isEdit"
+            >
+              <option [ngValue]="1">Aula</option>
+              <option [ngValue]="2">Laboratorio</option>
+              <option [ngValue]="3">Auditorio</option>
+              <option [ngValue]="4">Cafetería</option>
+              <option [ngValue]="5">Otro</option>
+            </select>
+
+            @if (isEdit) {
+              <small class="field-help">
+                El tipo de espacio no se puede modificar.
+              </small>
+            }
+          </div>
+
+          <!-- Capacidad -->
+          <div class="form-group">
+            <label for="capacity">
+              Capacidad
+            </label>
+
+            <input
+              id="capacity"
+              type="number"
+              formControlName="capacity"
+              min="1"
+              placeholder="Ej. 40"
+              class="form-control"
+            />
+
+            @if (
+              form.controls.capacity.invalid &&
+              form.controls.capacity.touched
+            ) {
+              <small class="field-error">
+                La capacidad debe ser mayor que 0.
+              </small>
+            }
+          </div>
+
+          <!-- Ubicación -->
+          <div class="form-group">
+            <label for="location">
+              Ubicación
+            </label>
+
+            <input
+              id="location"
+              type="text"
+              formControlName="location"
+              placeholder="Ej. Bloque A - Primer piso"
+              class="form-control"
+            />
+
+            @if (
+              form.controls.location.invalid &&
+              form.controls.location.touched
+            ) {
+              <small class="field-error">
+                La ubicación es obligatoria.
+              </small>
+            }
+          </div>
+
+        </div>
+
+        <div class="form-info">
+          <strong>Información</strong>
+          <p>
+            Los espacios nuevos se registran como activos.
+            La activación y desactivación se administra desde
+            la lista de espacios.
+          </p>
+        </div>
+
+        <div class="form-actions">
+          <a
+            routerLink="/spaces"
+            class="btn-cancel">
+            Cancelar
+          </a>
+
+          <button
+            type="submit"
+            class="btn-save"
+            [disabled]="loading()">
+            {{ loading()
+              ? 'Guardando...'
+              : (isEdit ? 'Actualizar espacio' : 'Guardar espacio')
+            }}
+          </button>
+        </div>
+
+      </form>
+    </div>
+  }
+</div>
